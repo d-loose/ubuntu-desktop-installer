@@ -22,7 +22,7 @@ dependencies:
     sdk: flutter
   flutter_markdown: ^0.6.2
   flutter_spinbox: ^0.13.0
-  flutter_svg: ^1.1.0
+  flutter_svg: ^2.0.4
   form_field_validator: ^1.1.0
   gsettings: ^0.2.5
   handy_window: ^0.3.0
@@ -42,7 +42,8 @@ dependencies:
       url: https://github.com/canonical/subiquity_client.dart.git
   timezone_map:
     git:
-      url: https://github.com/canonical/ubuntu-flutter-plugins.git
+      url: https://github.com/d-loose/ubuntu-flutter-plugins.git
+      ref: flutter-svg-2
       path: packages/timezone_map
   ubuntu_localizations: ^0.1.0
   ubuntu_logger: ^0.0.1
@@ -58,6 +59,7 @@ dependencies:
       path: packages/ubuntu_wizard
   udev: ^0.0.2
   upower: ^0.7.0
+  vector_graphics: ^1.1.4
   yaru: ^0.5.0
   yaru_icons: ^1.0.0
   yaru_widgets: ^2.2.0

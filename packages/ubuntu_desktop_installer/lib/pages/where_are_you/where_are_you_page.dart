@@ -49,11 +49,6 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
         controller.selectTimezone(timezones.firstOrNull);
       });
     });
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-      TimezoneMap.precacheAssets(context);
-    });
   }
 
   String formatLocation(GeoLocation? location) {

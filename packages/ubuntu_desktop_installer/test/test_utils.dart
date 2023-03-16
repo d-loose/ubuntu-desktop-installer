@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:subiquity_client/subiquity_client.dart';
 import 'package:ubuntu_desktop_installer/l10n.dart';
 import 'package:ubuntu_wizard/widgets.dart';
+import 'package:vector_graphics/vector_graphics.dart';
 
 export 'package:ubuntu_test/utils.dart' show UbuntuLangTester;
 
@@ -140,8 +141,8 @@ extension UbuntuFinders on CommonFinders {
 
       bool hasAssetPicture(Widget widget) {
         return widget is SvgPicture &&
-            widget.pictureProvider is ExactAssetPicture &&
-            (widget.pictureProvider as ExactAssetPicture)
+            widget.bytesLoader is AssetBytesLoader &&
+            (widget.bytesLoader as AssetBytesLoader)
                 .assetName
                 .endsWith(assetName);
       }
