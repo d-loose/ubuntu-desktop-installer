@@ -61,7 +61,9 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Provider.of<TimezoneController>(context);
+    final controller = context.read<TimezoneController>();
+    final location =
+        context.select((TimezoneController c) => c.selectedLocation);
     final lang = AppLocalizations.of(context);
 
     return WizardPage(
@@ -78,13 +80,12 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
                 Expanded(
                   child: YaruAutocomplete<GeoLocation>(
                     initialValue: TextEditingValue(
-                      text: formatLocation(controller.selectedLocation),
+                      text: formatLocation(location),
                     ),
                     fieldViewBuilder:
                         (context, editor, focusNode, onSubmitted) {
                       if (!focusNode.hasFocus) {
-                        editor.text =
-                            formatLocation(controller.selectedLocation);
+                        editor.text = formatLocation(location);
                       }
                       return TextFormField(
                         focusNode: focusNode,
@@ -106,13 +107,12 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
                 Expanded(
                   child: YaruAutocomplete<GeoLocation>(
                     initialValue: TextEditingValue(
-                      text: formatTimezone(controller.selectedLocation),
+                      text: formatTimezone(location),
                     ),
                     fieldViewBuilder:
                         (context, editor, focusNode, onFieldSubmitted) {
                       if (!focusNode.hasFocus) {
-                        editor.text =
-                            formatTimezone(controller.selectedLocation);
+                        editor.text = formatTimezone(location);
                       }
                       return TextFormField(
                         focusNode: focusNode,
@@ -136,8 +136,8 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
           const SizedBox(height: kContentSpacing),
           Expanded(
             child: TimezoneMap(
-              offset: controller.selectedLocation?.offset,
-              marker: controller.selectedLocation?.coordinates,
+              offset: location?.offset,
+              marker: location?.coordinates,
               onPressed: (coordinates) => controller
                   .searchMap(coordinates)
                   .then(controller.selectLocation),
@@ -154,7 +154,7 @@ class WhereAreYouPageState extends State<WhereAreYouPage> {
           context,
           onNext: () {
             final model = Provider.of<WhereAreYouModel>(context, listen: false);
-            return model.save(controller.selectedLocation?.timezone);
+            return model.save(location?.timezone);
           },
         ),
       ],
